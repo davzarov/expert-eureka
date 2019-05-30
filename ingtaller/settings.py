@@ -130,10 +130,10 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
 
 # Django settings
 
-LOGIN_URL = '/tablero/ingresar'
-LOGOUT_URL = '/tablero/salir'
-LOGIN_REDIRECT_URL = 'inicio'
-LOGOUT_REDIRECT_URL = 'inicio'
+# LOGIN_URL = '/tablero/ingresar'
+# LOGOUT_URL = '/tablero/salir'
+# LOGIN_REDIRECT_URL = 'inicio'
+# LOGOUT_REDIRECT_URL = 'inicio'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Third party settings
