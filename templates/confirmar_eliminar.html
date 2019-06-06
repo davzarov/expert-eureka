@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load dashboard_tags %}
+
+{% block title %}{{block.super}} | Eliminar Cita{% endblock title %}
+
+{% block content %}
+  <a onClick="javascript:history.go(-1);" class="btn waves-effect waves-light mb-4">
+    <i class="material-icons left">arrow_back</i> Atras
+  </a>
+  <div class="card">
+    <div class="card-content">
+    <span class="card-title">Eliminar {{objeto|to_class_name}}</span>
+      <form method="post">
+        {% csrf_token %}
+        <p>Está seguro de eliminar "{{objeto}}"?</p>
+        <br>
+        <button type="submit" class="btn waves-effect waves-light">Confirmar</button>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

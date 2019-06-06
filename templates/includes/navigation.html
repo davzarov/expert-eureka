@@ -1,0 +1,19 @@
+<ul id='profile-dropdown' class='dropdown-content'>
+  <li><a href="{% url 'dashboard:cambiar_contraseña' %}">Cambiar contraseña</a></li>
+  <li class="divider" tabindex="-1"></li>
+  <li><a href="{% url 'dashboard:salir' %}">Salir</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper teal">
+    <a href="{% url 'dashboard:dashboard' %}" class="brand-logo">Punto de Ventas</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {% if user.is_authenticated %}
+        <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+        <li class="{% if request.resolver_match.url_name == 'productos' %}active{% endif %}"><a href="{% url 'inventario:productos' %}">Inventario</a></li>
+        <li><a class='dropdown-trigger' href='#!' data-target='profile-dropdown'>{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+      {% else %}
+        <li><a href="{% url 'dashboard:ingresar' %}">Ingresar</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

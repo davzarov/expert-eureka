@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{block.super}} | Ingresar{% endblock title %}
+
+{% block content %}
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Ingresar</span>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="row">
+              {% for field in form %}
+                <div class="input-field col s12">
+                  {{field}}
+                  <label>{{field.label}}</label>
+                  {% if field.help_text %}
+                    <span class="helper-text" data-error="{{field.errors}}">{{field.help_text}}</span>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn waves-effect waves-light">Ingresar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

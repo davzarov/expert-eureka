@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    # local apps
+    'dashboard',
     'inventario',
 ]
 
@@ -55,7 +58,7 @@ ROOT_URLCONF = 'ingtaller.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,10 +134,10 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
 
 # Django settings
 
-# LOGIN_URL = '/tablero/ingresar'
-# LOGOUT_URL = '/tablero/salir'
-# LOGIN_REDIRECT_URL = 'inicio'
-# LOGOUT_REDIRECT_URL = 'inicio'
+LOGIN_URL = '/dashboard/ingresar'
+LOGOUT_URL = '/dashboard/salir'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'dashboard'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Third party settings

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load static humanize %}
+
+{% block title %}{{producto}} | {{block.super}}{% endblock title %}
+
+{% block extra_css %}
+  <style>
+    blockquote {
+      margin: 20px 0;
+      padding-left: 1.5rem;
+      border-left: 5px solid #009688;
+    }
+  </style>
+{% endblock extra_css %}
+
+{% block content %}
+  <a href="{% url 'inventario:productos' %}" class="btn waves-effect waves-light mb-4">
+    <i class="material-icons left">arrow_back</i> Atras
+  </a>
+  <br><br>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="{% static 'img/noimage.jpg' %}">
+          {% comment %} <span class="card-title">{{producto.nombre}}</span> {% endcomment %}
+          <a href="{% url 'inventario:eliminar' producto.id %}" class="btn-floating halfway-fab waves-effect waves-light red">
+            <i class="material-icons">delete</i>
+          </a>
+        </div>
+        <div class="card-content">
+          <p>Cantidad: {{producto.stock}}</p>
+          <p>Precio: &#8370; {{producto.precio|intcomma}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="card-panel teal">
+        <span class="flow-text white-text">{{producto.nombre}}<br><br>{{producto.descripcion}}</span>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
