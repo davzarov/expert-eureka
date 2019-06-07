@@ -27,7 +27,13 @@
                 {% endif %}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn waves-effect waves-light">Guardar</button>
+            <button type="submit" class="btn waves-effect waves-light">
+                {% if form.instance.id %}
+                    Modificar
+                {% else %}
+                    Guardar
+                {% endif %}
+            </button>
         </div>
       </form>
     </div>

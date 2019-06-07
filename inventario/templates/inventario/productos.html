@@ -12,23 +12,30 @@
   {% if productos %}
     <div class="row">
       {% for producto in productos %}
-        <div class="col m3 s12">
+        <div class="col m4 s12">
           <div class="card sticky-action">
             <div class="card-image waves-effect waves-block waves-light">
-              {% comment %} {% if producto.imagen %}
-                <img class="activator" src="{% static '' %}">
+              {% if producto.imagen %}
+                <img class="activator" src="{{producto.imagen.url}}">
               {% else %}
                 <img class="activator" src="{% static 'img/noimage.jpg' %}">
-              {% endif %} {% endcomment %}
-              <img class="activator" src="{% static 'img/noimage.jpg' %}">
+              {% endif %}
             </div>
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{producto.nombre}}<i class="material-icons right">more_vert</i></span>
-              <p>&#8370; {{producto.precio|intcomma}}</p>
+              <span class="card-title activator grey-text text-darken-4">
+                {{producto.nombre|truncatechars:12}}
+                <i class="material-icons right">more_vert</i>
+              </span>
+              <p>Cantidad: {{producto.cantidad}}</p>
+              <p>Precio: &#8370; {{producto.precio_costo|intcomma}}</p>
             </div>
             <div class="card-action">
-              <p><a href="{{producto.get_absolute_url}}">Detalles</a></p>
-              <p><a href="{% url 'inventario:actualizar' producto.id %}">Modificar</a></p>
+              <a href="{{producto.get_absolute_url}}" class="teal-text">
+                Detalles
+              </a>
+              <a href="{% url 'inventario:actualizar' producto.id %}" class="teal-text">
+                Modificar
+              </a>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">{{producto.nombre}}<i class="material-icons right">close</i></span>

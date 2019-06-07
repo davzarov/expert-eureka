@@ -20,24 +20,33 @@
   </a>
   <br><br>
   <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
-          <img src="{% static 'img/noimage.jpg' %}">
-          {% comment %} <span class="card-title">{{producto.nombre}}</span> {% endcomment %}
+          {% if producto.imagen %}
+            <img class="activator" src="{{producto.imagen.url}}">
+          {% else %}
+            <img class="activator" src="{% static 'img/noimage.jpg' %}">
+          {% endif %}
           <a href="{% url 'inventario:eliminar' producto.id %}" class="btn-floating halfway-fab waves-effect waves-light red">
             <i class="material-icons">delete</i>
           </a>
         </div>
         <div class="card-content">
-          <p>Cantidad: {{producto.stock}}</p>
-          <p>Precio: &#8370; {{producto.precio|intcomma}}</p>
+          <span class="card-title teal-text">{{producto.nombre}}</span>
+          <p>Precio de Costo: &#8370; {{producto.precio_costo|intcomma}}</p>
+          <p>Margen de Venta: {{producto.categoria.margen}}%</p>
+          <p>Precio de Venta: &#8370; {{producto.precio_venta|intcomma}}</p>
         </div>
       </div>
     </div>
-    <div class="col s12 m6">
+    <div class="col s12 m8">
       <div class="card-panel teal">
-        <span class="flow-text white-text">{{producto.nombre}}<br><br>{{producto.descripcion}}</span>
+        <span class="flow-text white-text">
+          Cantidad: x{{producto.cantidad}}<br>
+          Monto total del Stock: &#8370; {{producto.monto_total_stock|intcomma}}<br>
+          {{producto.descripcion}}
+        </span>
       </div>
     </div>
   </div>

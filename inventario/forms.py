@@ -1,5 +1,4 @@
 from django import forms
-
 from .models import Producto
 
 
@@ -12,8 +11,8 @@ class ProductoForm(forms.ModelForm):
             'nombre',
             # 'imagen',
             'descripcion',
-            'stock',
-            'precio',
+            'cantidad',
+            'precio_costo',
             'disponible'
         )
 
@@ -24,6 +23,6 @@ class ProductoForm(forms.ModelForm):
         self.fields['descripcion'].widget = forms.Textarea(attrs={
             'class': 'materialize-textarea'
         })
-        self.fields['precio'].widget = forms.NumberInput(attrs={})
-        self.fields['stock'].widget = forms.NumberInput(attrs={})
+        self.fields['precio_costo'].widget = forms.NumberInput(attrs={})
+        self.fields['cantidad'].widget = forms.NumberInput(attrs={})
         self.fields['disponible'].widget = forms.CheckboxInput(attrs={})
