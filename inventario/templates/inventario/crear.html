@@ -1,45 +1,51 @@
 {% extends "base.html" %}
 
+{% load dashboard_tags %}
+
 {% block title %}Nueva Cita | {{block.super}}{% endblock title %}
 
 {% block content %}
-  <a href="{% url 'inventario:productos' %}" class="btn waves-effect waves-light">
-    <i class="material-icons left">arrow_back</i> Atras
-  </a>
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">
-        {% if form.instance.id %}
-            Modificar Producto
-        {% else %}
-            Nuevo Producto
-        {% endif %}
-      </span>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row">
-            {% for field in form %}
-                <div class="input-field col s12">
-                {{field}}
-                <label>{{field.label}}</label>
-                {% if field.help_text %}
-                    <span class="helper-text" data-error="{{field.errors}}">{{field.help_text}}</span>
-                {% endif %}
-                </div>
-            {% endfor %}
-            <button type="submit" class="btn waves-effect waves-light">
-                {% if form.instance.id %}
-                    Modificar
-                {% else %}
-                    Guardar
-                {% endif %}
-            </button>
+  <div class="row">
+    <div class="col s12">
+      <a href="{% url 'inventario:productos' %}" class="btn waves-effect waves-light">
+        <i class="material-icons left">arrow_back</i> Atras
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            {% if form.instance.id %}
+                Modificar {{form.instance|to_class_name}}
+            {% else %}
+                Añadir {{form.instance|to_class_name}}
+            {% endif %}
+          </span>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                {% for field in form %}
+                    <div class="input-field col s12">
+                    {{field}}
+                    <label>{{field.label}}</label>
+                    {% if field.help_text %}
+                        <span class="helper-text" data-error="{{field.errors}}">{{field.help_text}}</span>
+                    {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn waves-effect waves-light">
+                    {% if form.instance.id %}
+                        Modificar
+                    {% else %}
+                        Guardar
+                    {% endif %}
+                </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 {% endblock content %}
-
-{% block extra_js %}
-  {{block.super}}
-{% endblock extra_js %}

@@ -15,10 +15,13 @@
 {% endblock extra_css %}
 
 {% block content %}
-  <a href="{% url 'inventario:productos' %}" class="btn waves-effect waves-light mb-4">
-    <i class="material-icons left">arrow_back</i> Atras
-  </a>
-  <br><br>
+  <div class="row">
+    <div class="col s12">
+      <a href="{% url 'inventario:productos' %}" class="btn waves-effect waves-light mb-4">
+        <i class="material-icons left">arrow_back</i> Atras
+      </a>
+    </div>
+  </div>
   <div class="row">
     <div class="col s12 m4">
       <div class="card">
