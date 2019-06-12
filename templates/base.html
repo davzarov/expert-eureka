@@ -22,7 +22,7 @@
         constrainWidth: false,
         coverTrigger: false
       };
-      var sidenav = M.Sidenav.init(document.querySelector('.sidenav'))
+      var sidenav = M.Sidenav.init(document.querySelector('.sidenav'));
       var dropdown = M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), dropdownOptions);
       {% block extra_js %}{% endblock extra_js %}
     });
