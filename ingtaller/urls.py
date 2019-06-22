@@ -26,6 +26,7 @@ urlpatterns = [
     path('', RedirectView.as_view(pattern_name='dashboard:dashboard')),
     path('dashboard/', include('dashboard.urls')),
     path('inventario/', include('inventario.urls')),
+    path('ventas/', include('ventas.urls')),
 ]
 
 if settings.DEBUG:

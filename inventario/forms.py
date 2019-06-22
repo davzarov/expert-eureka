@@ -3,12 +3,17 @@ from .models import Producto, Categoria
 
 
 class ProductoForm(forms.ModelForm):
+    categoria = forms.ModelChoiceField(
+        queryset=Categoria.objects.all(),
+        empty_label='Elije una categoría de la lista',
+        widget=forms.Select())
     # imagen = forms.FileField(widget=forms.FileInput())
 
     class Meta:
         model = Producto
         fields = (
             'nombre',
+            'categoria',
             # 'imagen',
             'descripcion',
             'cantidad',

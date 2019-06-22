@@ -2,7 +2,13 @@
 
 {% load dashboard_tags %}
 
-{% block title %}Nueva Cita | {{block.super}}{% endblock title %}
+{% block title %}
+  {% if form.instance.id %}
+    Modificar {{form.instance|to_class_name}}
+  {% else %}
+    Añadir {{form.instance|to_class_name}}
+  {% endif %} | {{block.super}}
+{% endblock title %}
 
 {% block content %}
   <div class="row">
@@ -49,3 +55,8 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block extra_js %}
+  {{block.super}}
+  var selects = M.FormSelect.init(document.querySelectorAll('select'));
+{% endblock extra_js %}

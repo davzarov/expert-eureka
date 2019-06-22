@@ -2,7 +2,7 @@
 
 {% load dashboard_tags %}
 
-{% block title %}{{block.super}} | Eliminar Cita{% endblock title %}
+{% block title %}Eliminar {{objeto|to_class_name}} | {{block.super}}{% endblock title %}
 
 {% block content %}
   <a onClick="javascript:history.go(-1);" class="btn waves-effect waves-light mb-4">

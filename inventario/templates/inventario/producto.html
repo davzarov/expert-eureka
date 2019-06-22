@@ -52,5 +52,18 @@
         </span>
       </div>
     </div>
+  </div>  
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large teal" href="{% url 'inventario:actualizar' producto.id %}">
+      <i class="large material-icons">mode_edit</i>
+    </a>
   </div>
 {% endblock content %}
+
+{% block extra_js %}
+  {{block.super}}
+  var fab = M.FloatingActionButton.init(
+    document.querySelector('.fixed-action-btn'), {
+      hoverEnabled: false
+    });
+{% endblock extra_js %}

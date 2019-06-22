@@ -4,40 +4,7 @@
 
 {% block title %}Productos | {{block.super}}{% endblock title %}
 
-{% block extra_css %}
-  <style>
-    .tabs .tab a {
-      color: #26a69a;
-    }
-    .tabs .tab a.active {
-      color: #26a69a;
-    }
-    .tabs .tab a:hover {
-      color: #26a69a;
-    }
-    .tabs .tab a:focus {
-      background-color: rgba(0, 255, 0, 0.1);
-    }
-    .tabs .tab a:focus.active {
-      background-color: rgba(0, 255, 0, 0.1);
-    }
-    .tabs .indicator {
-      background-color: #26a69a;
-    }
-  </style>
-{% endblock extra_css %}
-
 {% block content %}
-  <div class="row">
-    <div class="col s12">
-      <a href="{% url 'inventario:crear' %}" class="btn waves-effect waves-light mb-4">
-        <i class="material-icons left">add</i> Producto
-      </a>
-      <a href="{% url 'inventario:categoria' %}" class="btn waves-effect waves-light mb-4">
-          <i class="material-icons left">add</i> Categoría
-      </a>
-    </div>
-  </div>
   {% if categorias %}
     <div class="row">
       <div class="col s12">
@@ -107,10 +74,38 @@
         </div>
       </div>
     </div>
-  {% endif %}
+  {% endif %}  
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large teal">
+      <i class="large material-icons">add</i>
+    </a>
+    <ul>
+      <li>
+        <a class="btn-floating teal tooltipped"
+          href="{% url 'inventario:crear' %}"
+          data-position="left"
+          data-tooltip="Producto nuevo">
+          <i class="material-icons">add_shopping_cart</i>
+        </a>
+      </li>
+      <li>
+        <a class="btn-floating teal tooltipped"
+          href="{% url 'inventario:categoria' %}"
+          data-position="left"
+          data-tooltip="Categoría nueva">
+          <i class="material-icons">category</i>
+        </a>
+      </li>
+    </ul>
+  </div>
 {% endblock content %}
 
 {% block extra_js %}
-  {{block.meta}}
+  {{block.super}}
   var tabs = M.Tabs.init(document.querySelector('.tabs'));
+  var tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+  var fab = M.FloatingActionButton.init(
+    document.querySelector('.fixed-action-btn'), {
+      hoverEnabled: false
+    });
 {% endblock extra_js %}
