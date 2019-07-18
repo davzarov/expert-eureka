@@ -56,7 +56,7 @@
   </div>
 {% endblock content %}
 
-{% block extra_js %}
+{% block extra_materialize_js %}
   {{block.super}}
   var selects = M.FormSelect.init(document.querySelectorAll('select'));
-{% endblock extra_js %}
+{% endblock extra_materialize_js %}

@@ -100,7 +100,7 @@
   </div>
 {% endblock content %}
 
-{% block extra_js %}
+{% block extra_materialize_js %}
   {{block.super}}
   var tabs = M.Tabs.init(document.querySelector('.tabs'));
   var tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'));
@@ -108,4 +108,4 @@
     document.querySelector('.fixed-action-btn'), {
       hoverEnabled: false
     });
-{% endblock extra_js %}
+{% endblock extra_materialize_js %}

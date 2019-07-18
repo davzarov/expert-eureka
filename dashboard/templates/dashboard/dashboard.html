@@ -14,7 +14,7 @@
 {% endblock content %}
 
 
-{% block extra_js %}
+{% block extra_materialize_js %}
   {{block.super}}
   // area
   Highcharts.chart('basic-area', {
@@ -146,4 +146,4 @@
       }]
     }]
   });
-{% endblock extra_js %}
+{% endblock extra_materialize_js %}
