@@ -127,3 +127,7 @@ dmypy.json
 
 # Sublime-Text
 *.sublime-*
+
+# TODOS
+TODO
+*.todo
