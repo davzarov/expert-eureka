@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'dashboard',
     'inventario',
     'ventas',
+    # third party apps
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +144,15 @@ LOGOUT_REDIRECT_URL = 'dashboard'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Third party settings
+FRONTEND_DIR = os.path.join(os.path.dirname(BASE_DIR), 'frontend')
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'vue/',  # must end with slash
+        'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    }
+}
