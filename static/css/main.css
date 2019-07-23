@@ -1,0 +1,18 @@
+.tabs .tab a {
+    color: #26a69a;
+}
+.tabs .tab a.active {
+    color: #26a69a;
+}
+.tabs .tab a:hover {
+    color: #26a69a;
+}
+.tabs .tab a:focus {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+.tabs .tab a:focus.active {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+.tabs .indicator {
+    background-color: #26a69a;
+}

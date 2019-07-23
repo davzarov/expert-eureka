@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ventas',
     # third party apps
     'webpack_loader',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,7 @@ MEDIA_URL = '/media/' # 'http://0.0.0.0:8090/'
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
 
+FRONTEND_DIR = os.path.join(os.path.dirname(BASE_DIR), 'frontend')
 
 # Django settings
 
@@ -144,7 +146,6 @@ LOGOUT_REDIRECT_URL = 'dashboard'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Third party settings
-FRONTEND_DIR = os.path.join(os.path.dirname(BASE_DIR), 'frontend')
 
 WEBPACK_LOADER = {
     'DEFAULT': {
@@ -155,4 +156,12 @@ WEBPACK_LOADER = {
         'TIMEOUT': None,
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
     }
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }

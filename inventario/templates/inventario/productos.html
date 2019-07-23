@@ -99,13 +99,3 @@
     </ul>
   </div>
 {% endblock content %}
-
-{% block extra_materialize_js %}
-  {{block.super}}
-  var tabs = M.Tabs.init(document.querySelector('.tabs'));
-  var tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'));
-  var fab = M.FloatingActionButton.init(
-    document.querySelector('.fixed-action-btn'), {
-      hoverEnabled: false
-    });
-{% endblock extra_materialize_js %}

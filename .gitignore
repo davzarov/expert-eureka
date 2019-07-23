@@ -131,3 +131,6 @@ dmypy.json
 # TODOS
 TODO
 *.todo
+
+# Linters
+.pylintrc

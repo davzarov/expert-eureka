@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
+from ventas.api.urls import router
+
 admin.site.site_header = "Administración de Punto de Ventas"
 
 urlpatterns = [
@@ -27,6 +29,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('inventario/', include('inventario.urls')),
     path('ventas/', include('ventas.urls')),
+    path('api/', include(router.urls))
 ]
 
 if settings.DEBUG:

@@ -9,9 +9,5 @@ urlpatterns = [
     path(
         'pos',
         login_required(TemplateView.as_view(template_name='ventas/pos.html')),
-        name='pos'),
-    path(
-        'categorias',
-        views.categorias_json,
-        name='categorias'),
+        name='pos')
 ]

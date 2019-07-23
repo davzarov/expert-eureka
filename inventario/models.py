@@ -24,7 +24,7 @@ class Categoria(models.Model):
 class Producto(models.Model):
     nombre = models.CharField('nombre', max_length=255)
     categoria = models.ForeignKey(
-        Categoria, on_delete=models.CASCADE, blank=True, null=True)
+        Categoria, related_name='productos', on_delete=models.CASCADE, blank=True, null=True)
     imagen = models.ImageField(
         'imágen', upload_to='productos/%Y/%m/%d', blank=True)
     descripcion = models.TextField('descripción', blank=True)
