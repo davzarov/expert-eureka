@@ -19,9 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
-from ventas.api.urls import router
+from rest_framework import routers
+
+from ventas.api.views import CategoriaViewSet
 
 admin.site.site_header = "Administración de Punto de Ventas"
+
+router = routers.DefaultRouter()
+router.register(r'categorias', CategoriaViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +34,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('inventario/', include('inventario.urls')),
     path('ventas/', include('ventas.urls')),
+    path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls))
 ]
 
