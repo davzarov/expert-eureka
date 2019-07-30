@@ -5,9 +5,7 @@
 {% block title %}POS | {{block.super}}{% endblock title %}
 
 {% block content %}
-  <div id="app">
-    <app></app>
-  </div>
+  <div id="app"></div>
   {% render_bundle 'chunk-vendors' %}
   {% render_bundle 'vue_app_01' %}
 {% endblock content %}
