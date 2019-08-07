@@ -29,14 +29,15 @@ class Producto(models.Model):
         'imágen', upload_to='productos/%Y/%m/%d', blank=True)
     descripcion = models.TextField('descripción', blank=True)
     precio_costo = models.IntegerField('precio de costo', default=0)
-    cantidad = models.PositiveIntegerField('cantidad', default=0)
+    precio_venta = models.IntegerField('precio de venta', default=0)
+    cantidad = models.IntegerField('cantidad', default=0)
     disponible = models.BooleanField('disponible', default=True)
     creado = models.DateTimeField('creado', auto_now_add=True)
     modificado = models.DateTimeField('modificado', auto_now=True)
 
     class Meta:
-        verbose_name = "Producto"
-        verbose_name_plural = "Productos"
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
 
     def __str__(self):
         return self.nombre
@@ -44,11 +45,15 @@ class Producto(models.Model):
     def get_absolute_url(self):
         return reverse('inventario:producto', args=[self.id])
 
-    @property
-    def precio_venta(self):
+    def calcular_precio_venta(self):
         if self.categoria:
             return int(self.precio_costo + (self.precio_costo * (self.categoria.margen / 100.0)))
 
     @property
     def monto_total_stock(self):
         return self.precio_costo * self.cantidad
+
+    # pylint: disable=arguments-differ
+    def save(self, *args, **kwargs):
+        self.precio_venta = self.calcular_precio_venta()
+        super(Producto, self).save(*args, **kwargs)

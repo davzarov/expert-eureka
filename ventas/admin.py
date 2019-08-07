@@ -1,3 +1,28 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Venta, Item
+
+class ItemInline(admin.TabularInline):
+    model = Item
+    readonly_fields = ('producto', 'cantidad')
+    can_delete = True
+    extra = 0
+
+class VentaAdmin(admin.ModelAdmin):
+    list_display = (
+        '__str__',
+        'recibido',
+        'vuelto',
+        'total',
+        'creado',
+        'modificado')
+    readonly_fields = (
+        'recibido',
+        'vuelto',
+        'total')
+    inlines = [ItemInline,]
+
+    class Meta:
+        model = Venta
+
+admin.site.register(Venta, VentaAdmin)
