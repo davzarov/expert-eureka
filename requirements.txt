@@ -1,6 +1,6 @@
 astroid==2.2.5
 autopep8==1.4.4
-Django==2.1.10
+Django==2.1.15
 django-webpack-loader==0.6.0
 djangorestframework==3.10.1
 et-xmlfile==1.0.1
@@ -9,7 +9,7 @@ jdcal==1.4.1
 lazy-object-proxy==1.4.1
 mccabe==0.6.1
 openpyxl==2.6.2
-Pillow==6.0.0
+Pillow==6.2.0
 pycodestyle==2.5.0
 pylint==2.3.1
 pylint-django==2.0.9
