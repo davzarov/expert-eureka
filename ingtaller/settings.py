@@ -145,6 +145,7 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = '/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+
 # Third party settings
 
 WEBPACK_LOADER = {

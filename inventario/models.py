@@ -26,7 +26,7 @@ class Producto(models.Model):
     categoria = models.ForeignKey(
         Categoria, related_name='productos', on_delete=models.CASCADE, blank=True, null=True)
     imagen = models.ImageField(
-        'imágen', upload_to='productos/%Y/%m/%d', blank=True)
+        'imágen', upload_to='productos/%Y/%m/%d', blank=True, null=True)
     descripcion = models.TextField('descripción', blank=True)
     precio_costo = models.IntegerField('precio de costo', default=0)
     precio_venta = models.IntegerField('precio de venta', default=0)

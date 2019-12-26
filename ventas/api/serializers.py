@@ -1,13 +1,10 @@
-from rest_framework.serializers import (
-    ModelSerializer,
-    PrimaryKeyRelatedField
-)
+from rest_framework import serializers
 
 from inventario.models import Categoria, Producto
 from ventas.models import Venta, Item
 
 
-class ProductoSerializer(ModelSerializer):
+class ProductoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Producto
@@ -21,7 +18,7 @@ class ProductoSerializer(ModelSerializer):
         ]
 
 
-class CategoriaSerializer(ModelSerializer):
+class CategoriaSerializer(serializers.ModelSerializer):
     productos = ProductoSerializer(many=True, read_only=True)
 
     class Meta:
@@ -35,17 +32,33 @@ class CategoriaSerializer(ModelSerializer):
         ]
 
 
-class ItemSerializer(ModelSerializer):
-    producto = PrimaryKeyRelatedField(queryset=Producto.objects.all())
-    # producto = ProductoSerializer()
+class ItemSerializer(serializers.ModelSerializer):
+    producto = ProductoSerializer()
 
     class Meta:
         model = Item
         fields = ['id', 'producto', 'cantidad']
 
 
-class VentaSerializer(ModelSerializer):
-    items = ItemSerializer(many=True, read_only=False)
+class VentaSerializer(serializers.ModelSerializer):
+    items = ItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Venta
+        fields = ['id', 'recibido', 'vuelto', 'total', 'creado', 'items']
+
+
+class ItemCreateSerializer(serializers.ModelSerializer):
+    producto = serializers.PrimaryKeyRelatedField(
+        queryset=Producto.objects.all())
+
+    class Meta:
+        model = Item
+        fields = ['producto', 'cantidad']
+
+
+class VentaCreateSerializer(serializers.ModelSerializer):
+    items = ItemCreateSerializer(many=True, read_only=False)
 
     class Meta:
         model = Venta
@@ -54,11 +67,30 @@ class VentaSerializer(ModelSerializer):
     def create(self, validated_data):
         venta = Venta.objects.create(
             recibido=validated_data.get('recibido'),
-            vuelto=validated_data.get('vuelto'))
+            vuelto=validated_data.get('vuelto'),
+            total=validated_data.get('total'))
         items = validated_data.get('items')
         for item in items:
-            Item.objects.create(
-                venta=venta,
-                **item
-            )
+            Item.objects.create(venta=venta, **item)
         return validated_data
+
+
+class VentasDashboardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Venta
+        fields = ['total', 'creado']
+
+
+class ItemDashboardSerializer(serializers.ModelSerializer):
+    nombre_producto = serializers.CharField()
+    cantidad_vendida = serializers.IntegerField()
+
+    class Meta:
+        model = Item
+        fields = ['nombre_producto', 'cantidad_vendida']
+
+
+# pylint:disable=abstract-method
+class DashboardSerializer(serializers.Serializer):
+    ventas = VentasDashboardSerializer(many=True)
+    items = ItemDashboardSerializer(many=True)

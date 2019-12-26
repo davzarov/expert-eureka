@@ -5,8 +5,9 @@ from .models import Venta, Item
 class ItemInline(admin.TabularInline):
     model = Item
     readonly_fields = ('producto', 'cantidad')
-    can_delete = True
+    can_delete = False
     extra = 0
+    max_num = 0
 
 class VentaAdmin(admin.ModelAdmin):
     list_display = (

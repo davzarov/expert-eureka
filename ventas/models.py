@@ -1,6 +1,5 @@
 from django.db import models
-from django.db.models import F, Sum
-from django.db.models.functions import Coalesce
+from django.db.models import Sum, F
 
 from inventario.models import Producto
 
@@ -19,16 +18,20 @@ class Venta(models.Model):
     def __str__(self):
         return f"{self.id}-{self.creado.strftime('%d%m%Y-%H%M%S')}"
 
-    def calcular_total(self):
-        return self.items \
-            .aggregate(total=Coalesce(Sum(
-                F('producto__precio_venta') * F('cantidad'),
-                output_field=models.IntegerField()), 0))['total']
 
-    # pylint: disable=arguments-differ
-    # def save(self, *args, **kwargs):
-    #     self.total = self.calcular_total()
-    #     super(Venta, self).save(*args, **kwargs)
+class ItemQuerySet(models.QuerySet):
+    def best_sellers(self):
+        return self.annotate(nombre_producto=F('producto__nombre')).values('nombre_producto') \
+            .annotate(cantidad_vendida=Sum(F('cantidad') * F('producto__precio_venta'))) \
+                .order_by('-cantidad_vendida')[:5]
+
+
+class ItemManager(models.Manager):
+    def get_queryset(self):
+        return ItemQuerySet(self.model, using=self._db)
+
+    def best_sellers(self):
+        return self.get_queryset().best_sellers()
 
 
 class Item(models.Model):
@@ -37,10 +40,12 @@ class Item(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField('cantidad', default=1)
 
+    objects = ItemManager()
+
     class Meta:
         verbose_name = 'Item'
         verbose_name_plural = 'Items'
         unique_together = ('venta', 'producto')
 
     def __str__(self):
-        return f"{self.id}-{self.producto}"
+        return f"{self.producto}"

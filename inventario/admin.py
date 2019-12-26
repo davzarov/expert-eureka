@@ -20,8 +20,6 @@ class ProductoAdmin(admin.ModelAdmin):
     list_display = (
         'nombre',
         'categoria',
-        'imagen',
-        'descripcion',
         'precio_costo',
         'precio_venta',
         'cantidad',
